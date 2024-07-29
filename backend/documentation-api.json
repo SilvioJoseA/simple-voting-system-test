@@ -1,0 +1,420 @@
+{
+    "API": {
+      "version": "1.0",
+      "baseUrl": "http://127.0.0.1:{PORT}/api",
+      "endpoints": [
+        {
+          "path": "/users",
+          "methods": [
+            {
+              "method": "GET",
+              "description": "Retrieves a list of all users.",
+              "responses": {
+                "200": {
+                  "description": "Successfully retrieved the list of users.",
+                  "example": [
+                    {
+                      "id": 1,
+                      "name": "John Doe",
+                      "email": "jose@gmail.com",
+                      "role": "admin"
+                    }
+                  ]
+                },
+                "500": {
+                  "description": "Internal server error.",
+                  "example": {
+                    "error": "Failed to retrieve users"
+                  }
+                }
+              }
+            },
+            {
+              "method": "POST",
+              "description": "Creates a new user.",
+              "requestBody": {
+                "description": "Data for the new user.",
+                "example": {
+                  "name": "Paula Smith",
+                  "email": "paula.smith@gmail.com",
+                  "password": "password123",
+                  "role": "user"
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "User created successfully.",
+                  "example": {
+                    "id": 2,
+                    "name": "Paula Smith",
+                    "email": "paula.smith@gmail.com",
+                    "role": "user"
+                  }
+                },
+                "422": {
+                  "description": "Unprocessable entity.",
+                  "example": {
+                    "error": {
+                      "email": [
+                        "The email has already been taken."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "path": "/users/{id}",
+          "methods": [
+            {
+              "method": "GET",
+              "description": "Retrieves details of a specific user.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the user.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successfully retrieved user details.",
+                  "example": {
+                    "id": 1,
+                    "name": "John Doe",
+                    "email": "jose@gmail.com",
+                    "role": "admin"
+                  }
+                },
+                "404": {
+                  "description": "User not found.",
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            },
+            {
+              "method": "PUT",
+              "description": "Updates the information of a specific user.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the user.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "requestBody": {
+                "description": "Updated data for the user.",
+                "example": {
+                  "name": "Jane Smith",
+                  "email": "jane.smith@gmail.com",
+                  "password": "newpassword123",
+                  "role": "admin"
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "User updated successfully.",
+                  "example": {
+                    "id": 2,
+                    "name": "Jane Smith",
+                    "email": "jane.smith@gmail.com",
+                    "role": "admin"
+                  }
+                },
+                "404": {
+                  "description": "User not found.",
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            },
+            {
+              "method": "DELETE",
+              "description": "Deletes a specific user.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the user.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "204": {
+                  "description": "User successfully deleted."
+                },
+                "404": {
+                  "description": "User not found.",
+                  "example": {
+                    "error": "User not found"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "path": "/questions",
+          "methods": [
+            {
+              "method": "GET",
+              "description": "Retrieves a list of all questions.",
+              "responses": {
+                "200": {
+                  "description": "Successfully retrieved the list of questions.",
+                  "example": [
+                    {
+                      "id": 1,
+                      "question": "What is your favorite color?",
+                      "created_at": "2024-01-01T00:00:00Z"
+                    }
+                  ]
+                },
+                "500": {
+                  "description": "Internal server error.",
+                  "example": {
+                    "error": "Failed to retrieve questions"
+                  }
+                }
+              }
+            },
+            {
+              "method": "POST",
+              "description": "Creates a new question.",
+              "requestBody": {
+                "description": "Data for the new question.",
+                "example": {
+                  "question": "What is your favorite food?"
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Question created successfully.",
+                  "example": {
+                    "id": 2,
+                    "question": "What is your favorite food?",
+                    "created_at": "2024-07-29T00:00:00Z"
+                  }
+                },
+                "422": {
+                  "description": "Unprocessable entity.",
+                  "example": {
+                    "error": {
+                      "question": [
+                        "The question field is required."
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "path": "/questions/{id}",
+          "methods": [
+            {
+              "method": "GET",
+              "description": "Retrieves details of a specific question.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the question.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Successfully retrieved question details.",
+                  "example": {
+                    "id": 1,
+                    "question": "What is your favorite color?",
+                    "created_at": "2024-01-01T00:00:00Z"
+                  }
+                },
+                "404": {
+                  "description": "Question not found.",
+                  "example": {
+                    "error": "Question not found"
+                  }
+                }
+              }
+            },
+            {
+              "method": "PUT",
+              "description": "Updates the information of a specific question.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the question.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "requestBody": {
+                "description": "Updated data for the question.",
+                "example": {
+                  "question": "What is your favorite movie?"
+                }
+              },
+              "responses": {
+                "200": {
+                  "description": "Question updated successfully.",
+                  "example": {
+                    "id": 2,
+                    "question": "What is your favorite movie?",
+                    "created_at": "2024-07-29T00:00:00Z"
+                  }
+                },
+                "404": {
+                  "description": "Question not found.",
+                  "example": {
+                    "error": "Question not found"
+                  }
+                }
+              }
+            },
+            {
+              "method": "DELETE",
+              "description": "Deletes a specific question.",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "description": "ID of the question.",
+                  "required": true,
+                  "type": "integer"
+                }
+              ],
+              "responses": {
+                "204": {
+                  "description": "Question successfully deleted."
+                },
+                "404": {
+                  "description": "Question not found.",
+                  "example": {
+                    "error": "Question not found"
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+            "path": "/options",
+            "methods": [
+              {
+                "method": "GET",
+                "description": "Retrieves a list of all options.",
+                "responses": {
+                  "200": {
+                    "description": "Successfully retrieved the list of options.",
+                    "example": [
+                      {
+                        "id": 1,
+                        "question_id": 1,
+                        "title": "Red",
+                        "description": "A color",
+                        "image_url": "http://img.com/red.jpg"
+                      }
+                    ]
+                  },
+                  "500": {
+                    "description": "Internal server error.",
+                    "example": {
+                      "error": "Failed to retrieve options"
+                    }
+                  }
+                }
+              },
+              {
+                "method": "POST",
+                "description": "Creates a new option.",
+                "requestBody": {
+                  "description": "Data for the new option.",
+                  "example": {
+                    "question_id": 1,
+                    "title": "Blue",
+                    "description": "A color",
+                    "image_url": "http://img.com/blue.jpg"
+                  }
+                },
+                "responses": {
+                  "201": {
+                    "description": "Option created successfully.",
+                    "example": {
+                      "id": 2,
+                      "question_id": 1,
+                      "title": "Blue",
+                      "description": "A color",
+                      "image_url": "http://img.com/blue.jpg"
+                    }
+                  },
+                  "422": {
+                    "description": "Unprocessable entity.",
+                    "example": {
+                      "error": {
+                        "question_id": [
+                          "The question_id field is required."
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "path": "/votes",
+            "methods": [
+              {
+                "method": "POST",
+                "description": "Records a vote for a specific option.",
+                "requestBody": {
+                  "description": "Data for recording a vote.",
+                  "example": {
+                    "user_id": 1,
+                    "option_id": 2
+                  }
+                },
+                "responses": {
+                  "201": {
+                    "description": "Vote recorded successfully.",
+                    "example": {
+                      "id": 1,
+                      "user_id": 1,
+                      "option_id": 2,
+                      "created_at": "2024-07-29T00:00:00Z"
+                    }
+                  },
+                  "422": {
+                    "description": "Unprocessable entity.",
+                    "example": {
+                      "error": {
+                        "option_id": [
+                          "The option_id field is required."
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+    
